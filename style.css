@@ -1,0 +1,275 @@
+/* --- CSS Variables for Modern Theme --- */
+:root {
+    --bg-color: #f8f9fa;
+    --surface-color: #ffffff;
+    --primary-color: #00529B; /* Deeper Blue */
+    --text-color: #212529;
+    --subtle-text-color: #6c757d;
+    --border-color: #e9ecef;
+    --shadow-color: rgba(0, 0, 0, 0.075);
+
+    --up-train-color: #2a9d8f;   /* Teal for Up direction */
+    --down-train-color: #ffb703; /* Amber for Down direction */
+    --stop-color: #e63946;     /* Red */
+    --delay-color: #e76f51;    /* Orange */
+    --wait-color: #0077b6;     /* Blue */
+
+    --info-bg-color: #e7f5ff;
+    --info-border-color: #a5d8ff;
+    --info-icon-color: #1c7ed6;
+}
+
+/* --- General Settings --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 640px;
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 25px var(--shadow-color);
+    padding: 24px 32px;
+    border: 1px solid var(--border-color);
+}
+
+header {
+    text-align: center;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+h1 {
+    font-size: 1.75em;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+#current-time {
+    font-size: 1.1em;
+    color: var(--subtle-text-color);
+    font-weight: 500;
+}
+
+/* --- Announcements --- */
+#announcements-board {
+    margin-bottom: 24px;
+}
+
+.announcement-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: var(--info-bg-color);
+    border: 1px solid var(--info-border-color);
+    color: var(--primary-color);
+    font-size: 0.9em;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.announcement-item:last-child {
+    margin-bottom: 0;
+}
+
+.announcement-icon {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--info-icon-color);
+}
+
+/* --- Legend --- */
+.legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    margin-bottom: 24px;
+    font-size: 0.85em;
+    color: var(--subtle-text-color);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.legend-icon.up {
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 12px solid var(--up-train-color);
+}
+
+.legend-icon.down {
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 12px solid var(--down-train-color);
+}
+
+.legend-icon.stopped {
+    color: var(--stop-color);
+    font-weight: bold;
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+.legend-icon.waiting {
+    color: var(--wait-color);
+}
+
+/* --- Track Layout --- */
+#train-guide-wrapper {
+    position: relative;
+    padding: 0 40px;
+}
+
+#track {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    bottom: 20px;
+    width: 3px;
+    background-color: #ced4da;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.station {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    font-size: 14px;
+}
+
+.station-marker {
+    position: absolute;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: var(--surface-color);
+    border: 3px solid var(--primary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    z-index: 2;
+}
+
+.station-name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(25px);
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+/* --- Suspended Section --- */
+.suspended-section {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px; /* 太さ */
+    background-color: rgba(230, 57, 70, 0.3); /* 半透明の赤 */
+    border-left: 2px solid var(--stop-color);
+    border-right: 2px solid var(--stop-color);
+    z-index: 5;
+    cursor: pointer;
+}
+
+
+/* --- Train Icons --- */
+.train {
+    position: absolute;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    transition: top 1s linear;
+    z-index: 10;
+}
+
+.train.up {
+    left: 50%;
+    transform: translateX(12px);
+    border-left: 14px solid var(--up-train-color);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+.train.down {
+    left: 50%;
+    transform: translateX(-12px - 14px);
+    border-right: 14px solid var(--down-train-color);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+.train.delayed {
+     border-left-color: var(--delay-color);
+     border-right-color: var(--delay-color);
+}
+
+.train.stopped, .train.waiting {
+    width: 22px;
+    height: 22px;
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1;
+}
+
+.train.stopped {
+    background-color: var(--stop-color);
+}
+.train.stopped::before {
+    content: '×';
+}
+
+.train.waiting {
+    background-color: var(--wait-color);
+}
+
+/* --- Tooltip --- */
+.tooltip {
+    display: none;
+    position: fixed;
+    background-color: #212529;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+    z-index: 20;
+    pointer-events: none;
+    line-height: 1.6;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
